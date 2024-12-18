@@ -1,0 +1,70 @@
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QGridLayout
+from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
+
+from enum import Enum
+
+class AppLayoutH(int):
+    SideBarLeft = 0
+    ContentArea = 1
+    SideBarRight = 2
+
+class AppLayoutV(int):
+    BarTop = 0
+    ContentArea = 1
+    BarBottom = 2
+
+app = QApplication([])
+
+window = QMainWindow()
+
+# Setting up Window
+window.setMinimumSize(600, 400)
+window.setWindowTitle('HunskyBot | Twitch Chatbot')
+window.setWindowIcon(QIcon('appIcon.png'))
+
+appLayout = QGridLayout()
+sideBarLeft = QVBoxLayout()
+
+
+# Creating Widgets
+lblAppName = QLabel('HunskyBot', alignment = Qt.AlignmentFlag.AlignLeft)
+lblPlaceholderContent = QLabel('Content', alignment = Qt.AlignmentFlag.AlignCenter)
+
+btnDashboard = QPushButton('Dashboard')
+btnCommands = QPushButton('Commands')
+btnAdvCommands = QPushButton('Commands+')
+btnTimers = QPushButton('Timers')
+
+centerWidget = QWidget()
+
+
+font = window.font()
+font .setPointSize(20)
+font.setBold(True)
+lblAppName.setFont(font)
+
+
+btnDashboard.setMaximumSize(50, 50)
+sideBarLeft.addWidget(lblAppName)
+sideBarLeft.addWidget(btnDashboard)
+sideBarLeft.addWidget(btnCommands)
+sideBarLeft.addWidget(btnAdvCommands)
+sideBarLeft.addWidget(btnTimers)
+
+
+sideBarLeft.setAlignment(btnDashboard, Qt.AlignmentFlag.AlignTop)
+sideBarLeft.setAlignment(btnCommands, Qt.AlignmentFlag.AlignTop)
+sideBarLeft.setAlignment(btnAdvCommands, Qt.AlignmentFlag.AlignTop)
+sideBarLeft.setAlignment(btnTimers, Qt.AlignmentFlag.AlignTop)
+
+appLayout.addLayout(sideBarLeft, AppLayoutV.ContentArea ,AppLayoutH.SideBarLeft)
+appLayout.addWidget(lblPlaceholderContent, AppLayoutV.ContentArea ,AppLayoutH.ContentArea)
+
+centerWidget.setLayout(appLayout)
+
+window.setCentralWidget(centerWidget)
+
+
+window.show()
+app.exec()

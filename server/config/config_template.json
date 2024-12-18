@@ -1,0 +1,14 @@
+{
+    "commands": [],
+    "counters": {
+        "deaths": {
+            "counter": 0
+        },
+        "lost": {
+            "counter": 0
+        },
+        "mist": {
+            "counter": 0
+        }
+    }
+}
