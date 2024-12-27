@@ -18,6 +18,44 @@ load_dotenv(envPath)
 CONFIG_TEMPLATE_PATH = os.getenv('CONFIG_TEMPLATE_PATH')
 
 
+# GOTO - Class Definitions
+
+# Class | Queue
+class Queue: 
+    """
+    Creates an object for holding Player Queue data.
+
+    Args:
+        players (array/list): the array object containing the players in the Queue.
+
+        multiJoin (bool): the boolean object containing the multiJoin status of the Queue.
+
+        joinable (bool): the boolean object containing the joinable status of the Queue.
+    """
+    def __init__(self, players, multiJoin, joinable):
+        self.players: list = players
+        self.multiJoin: bool = multiJoin
+        self.joinable: bool = joinable
+
+    def addPlayer(self, player):
+        self.players.append(player)
+
+    def removePlayer(self, player):
+        self.players.remove(player)
+
+    def setMultiJoin(self, multiJoin):
+        self.multiJoin = multiJoin
+
+    def setJoinable(self, joinable):
+        self.joinable = joinable
+
+    def removePlayerAllInstances(self, removedPlayer):
+        for index in range(len(self.players)):
+                if self.players[index] == removedPlayer.lower():
+                    self.players.pop(index)
+
+
+
 # GOTO - Basic Create/Load/Update Config
 
 # Loads Config from JSON Config File
@@ -180,6 +218,7 @@ def readCommandConfig(data):
         print(f"Error processing JSON content: {e}")
         return None
 
+
 # Reads the Command Section of the Config
 def readCounterConfig(data):
     """
@@ -215,3 +254,37 @@ def readCounterConfig(data):
         print(f"Error processing JSON content: {e}")
         return None 
     
+
+# Reads the List Section of the Config
+def readQueueConfig(data):
+    """
+    Creates an Enum from the "queue" object in a JSON file.
+
+    Args:
+        data (any): the data object containing the loaded JSON Config.
+
+    Returns:
+        Enum: An Enum class with entries derived from the "queue" object.
+    """
+    try:
+        
+        # Check if "queue" key exists
+        if "lists" not in data:
+            raise KeyError("The JSON file does not contain a 'queue' key.")
+
+        # Extract command names
+        player_list = data["lists"]["queue"]["players"]
+        joinable = data["lists"]["queue"]["joinable"]
+        multiJoin = data["lists"]["queue"]["multiJoin"]
+        # if not isinstance(queue, dict):
+            # raise ValueError("The 'queue' key must contain an object (dictionary).")
+
+        # Return Queue Object
+        return Queue(player_list, multiJoin, joinable)
+
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error reading JSON file: {e}")
+        return None
+    except (KeyError, ValueError) as e:
+        print(f"Error processing JSON content: {e}")
+        return None 

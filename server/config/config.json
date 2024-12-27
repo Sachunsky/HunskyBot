@@ -4,17 +4,25 @@
         "lurk",
         "dead",
         "lost",
-        "mist"
+        "mist",
+        "queue"
     ],
     "counters": {
         "dead": {
-            "counter": 0
+            "counter": 1
         },
         "lost": {
-            "counter": 0
+            "counter": 2
         },
         "mist": {
-            "counter": 0
+            "counter": 1
+        }
+    },
+    "lists": {
+        "queue": {
+            "players": [],
+            "multiJoin": true,
+            "joinable": true
         }
     }
 }

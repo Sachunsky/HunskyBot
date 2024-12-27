@@ -27,3 +27,6 @@ yarn-error.log*
 .env
 server/venv
 server/__pycache__
+
+# VS Code ignores
+.code-workspace
