@@ -29,4 +29,4 @@ server/venv
 server/__pycache__
 
 # VS Code ignores
-.code-workspace
+HunskyBot.code-workspace
