@@ -30,3 +30,6 @@ server/__pycache__
 
 # VS Code ignores
 HunskyBot.code-workspace
+
+# Test file
+server/test.py

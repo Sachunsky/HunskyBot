@@ -10,9 +10,9 @@ from dotenv import find_dotenv, load_dotenv
 from enum import Enum
 
 # Project specific imports
-import ConfigManager
-from ConfigManager import Queue
-
+import config
+from config import Queue, Config
+from spotify import addTrackToQueue
 
 # Loading .env file
 envPath = find_dotenv()
@@ -23,10 +23,11 @@ TARGET_CHANNEL = os.getenv("CHANNEL")
 CONFIG_PATH = os.getenv("CONFIG_PATH")
 
 # Load Config
-config = ConfigManager.loadConfig(CONFIG_PATH)
-counters, counter_array = ConfigManager.readCounterConfig(config)
-commandList = ConfigManager.readCommandConfig(config)
-queue  = ConfigManager.readQueueConfig(config)
+cfg = Config()
+cfg.LoadConfig()
+counters, counter_array = config.readCounterConfig(cfg.config)
+commandList = config.readCommandConfig(cfg.config)
+queue  = config.readQueueConfig(cfg.config)
 
 
 
@@ -39,21 +40,27 @@ async def help_command(cmd: ChatMessage):
         cmdList = cmdList + '!' + command.value + ', '
     await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'Enabled Commands: {cmdList}')  
 
+# TODO: Delete this command after rewriting the CustomCommands file
 # Event Listener | Command | LURK
 async def lurk_command(cmd: ChatMessage):
     dice = random.randint(0, 3)
 
     if dice == 0:
-        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name}  verschwindet in\'s Gebüsch Lurking ... Möge der Lurk mit dir sein! catLurk')    
+        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} verschwindet in\'s Gebüsch Lurking ... Möge der Lurk mit dir sein! catLurk')    
     elif dice == 1:
         await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} hat den Tarnmodus aktiviert. Lurking Danke fürs Lurken und die Unterstützung! PETTHECHAT')  
     elif dice == 2:
-        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name}  ist AFK gegangen, aber XP fürs Lurken gibt\'s trotzdem! GoodGame Danke für den Support!')  
+        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} ist AFK gegangen, aber XP fürs Lurken gibt\'s trotzdem! GoodGame Danke für den Support!')  
     elif dice == 3:
-        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name}  hat den Chat in den Hintergrundprozess verschoben. robotD CPU-Auslastung: 0%, Support-Level: 100%!')  
+        await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} hat den Chat in den Hintergrundprozess verschoben. robotD CPU-Auslastung: 0%, Support-Level: 100%!')  
+
+# TODO: Delete this command after rewriting the CustomCommands file
+# Event Listener | Command | DC
+async def dc_command(cmd: ChatMessage):
+    await cmd.chat.send_message(f'#{TARGET_CHANNEL}', 'Salzkasten Discord Server: https://discord.gg/w9ussRAcFT')
 
 
-
+# TODO: Delete this command after rewriting the Counter System
 # GOTO - COUNTERS
 
 # Event Listener | Timer Command | LOST 
@@ -78,7 +85,7 @@ async def mist_command(cmd: ChatMessage):
     await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@Sachunsky macht zum {counter_array[counters.MIST.value][1]}-mal nur Mist! NOPERS ThisIsFine')
 
 
-
+# TODO: Rewrite to take new config system into account AND move to builtInCommands.py
 # GOTO - Queue & Giveaway Lists
 
 # Event Listener | Command | QUEUE
@@ -234,3 +241,20 @@ async def queue_command(cmd: ChatMessage):
         return
 
 
+
+# TODO: Rewrite to take new config system into account AND move to spotify.py
+# GOTO - MUSIC
+
+# Event Listener | Command | Song Request
+async def sr_command(cmd: ChatMessage):
+    if cmd.text.startswith('!sr '):
+        try:
+            songURI = cmd.text.replace('!sr ', '')
+            addTrackToQueue(songURI)
+            await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} hat einen Song in die Queue hinzugefügt!')
+            
+        except Exception as e:
+            await cmd.chat.send_message(f'#{TARGET_CHANNEL}', f'@{cmd.user.name} das hat leider nicht geklappt! Vielleicht ein ungültigen Song-Link!? D:')
+            return print(e.message)
+
+# GOTO - 

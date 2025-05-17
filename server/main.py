@@ -8,8 +8,9 @@ from twitchAPI.type import AuthScope, ChatEvent, ChatRoom
 from twitchAPI.oauth import UserAuthenticator
 from twitchAPI.twitch import Twitch
 
-import Commands
-import ConfigManager
+import customCommands as CustomCommands
+from config import Config
+import config
 
 # Misc
 import asyncio
@@ -30,6 +31,7 @@ TARGET_CHANNEL = os.getenv("CHANNEL")
 TOKEN = os.getenv('TOKEN')
 REFRESH_TOKEN = os.getenv('REFRESH_TOKEN')
 CONFIG_PATH = os.getenv('CONFIG_PATH')
+
 
 
 # GOTO - Common Event Listeners
@@ -64,18 +66,19 @@ async def runBot():
     chat = await Chat(bot)
 
     # Load Config from config.json
-    config = ConfigManager.loadConfig(CONFIG_PATH)
-    cmdList: Enum = ConfigManager.readCommandConfig(config)
-
+    cfg = Config()
+    cfg.LoadConfig()
+    cmdList: Enum = ConfigManager.readCommandConfig(cfg.config)
 
     # Register Common Events
     chat.register_event(ChatEvent.READY, onConnect)
     chat.register_event(ChatEvent.MESSAGE, onMessage)
 
+
+# TODO: Rewrite to use new Middleware and new command system
     # Register commands
     for cmd in cmdList:
-        chat.register_command(cmd.name, getattr(Commands, f'{cmd.name}_command'))
-
+        chat.register_command(cmd.name, getattr(CustomCommands, f'{cmd.name}_command'))
 
     # Start the chat bot
     chat.start()

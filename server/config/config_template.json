@@ -1,14 +1,207 @@
 {
-    "commands": [],
-    "counters": {
-        "deaths": {
-            "counter": 0
+    "defaultSettings": {
+        "prefix": "!",
+        "timezone": "",
+        "altTimezone": "",
+        "builtInCommands": {
+            "help": {
+                "displayName": "Help",
+                "enabled": true,
+                "command": "help",
+                "restriction": "none",
+                "userCooldown": 10,
+                "globalCooldown": 10
+            },
+            "queue": {
+                "enabled": true,
+                "command": "queue",
+                "restriction": "none",
+                "joinable": true,
+                "multiJoin": true,
+                "waitlist": []
+            },
+            "counters": {
+                "enabled": true,
+                "userCounters": {}
+            },
+            "spotify": {
+                "enabled": true,
+                "command": "spo",
+                "restriction": "none",
+                "userCooldown": 1,
+                "globalCooldown": 1,
+                "features": {
+                    "addToQueue": {
+                        "enabled": true,
+                        "command": "{default}",
+                        "restriction": "none"
+                    },
+                    "removeFromQueue": {
+                        "enabled": true,
+                        "command": "rm",
+                        "restriction": "none"
+                    },
+                    "skipTrack": {
+                        "enabled": true,
+                        "command": "skip",
+                        "restriction": "none"
+                    }
+                }
+            },
+            "chatGPT": {
+                "enabled": true,
+                "command": "gpt",
+                "restriction": "none",
+                "userCooldown": 2,
+                "globalCooldown": 1,
+                "features": {                    
+                    "multiUserChat": {
+                        "enabled": true,
+                        "command": "{default}",
+                        "restriction": "none"
+                    },
+                    "questionResponse": {
+                        "enabled": true,
+                        "command": "faq",
+                        "restriction": "none"
+                    }
+                }
+            }
         },
-        "lost": {
-            "counter": 0
+        "customCommands": {
+            "enabled": true,
+            "commands": {}
+        }
+    },
+    "userSettings": {
+        "prefix": "!",
+        "timezone": "",
+        "altTimezone": "",
+        "builtInCommands": {
+            "help": {
+                "displayName": "Help",
+                "enabled": true,
+                "command": "help",
+                "restriction": "none",
+                "userCooldown": 10,
+                "globalCooldown": 10
+            },
+            "queue": {
+                "enabled": true,
+                "command": "queue",
+                "restriction": "none",
+                "joinable": true,
+                "multiJoin": true,
+                "waitlist": []
+            },
+            "counters": {
+                "enabled": true,
+                "userCounters": {
+                    "deaths": {
+                        "displayName": "Deaths",
+                        "enabled": true,
+                        "command": "dead",
+                        "restriction": "none",
+                        "userCooldown": 1,
+                        "globalCooldown": 1,
+                        "counter": 0,
+                        "response": "@{streamer} geht nun schon zum {counter}-mal im Himmel die Patchnotes lesen! Sadge RIP"
+                    },
+                    "lost": {
+                        "displayName": "Lost",
+                        "enabled": true,
+                        "command": "lost",
+                        "restriction": "none",
+                        "userCooldown": 1,
+                        "globalCooldown": 1,
+                        "counter": 0,
+                        "response": "@{streamer} ist zum {counter}-mal so orientierungslos wie ein Navi ohne GPS! WaitWhat catJAM"
+                    },
+                    "mist": {
+                        "displayName": "Mist",
+                        "enabled": true,
+                        "command": "mist",
+                        "restriction": "none",
+                        "userCooldown": 1,
+                        "globalCooldown": 1,
+                        "counter": 0,
+                        "response": "@{streamer} macht zum {counter}-mal nur Mist! NOPERS ThisIsFine"
+                    }
+                }
+            },
+            "spotify": {
+                "enabled": true,
+                "command": "spo",
+                "restriction": "none",
+                "userCooldown": 1,
+                "globalCooldown": 1,
+                "features": {
+                    "addToQueue": {
+                        "enabled": true,
+                        "command": "{default}",
+                        "restriction": "none"
+                    },
+                    "removeFromQueue": {
+                        "enabled": true,
+                        "command": "rm",
+                        "restriction": "none"
+                    },
+                    "skipTrack": {
+                        "enabled": true,
+                        "command": "skip",
+                        "restriction": "none"
+                    }
+                }
+            },
+            "chatGPT": {
+                "enabled": true,
+                "command": "gpt",
+                "restriction": "none",
+                "userCooldown": 2,
+                "globalCooldown": 1,
+                "features": {                    
+                    "multiUserChat": {
+                        "enabled": true,
+                        "command": "{default}",
+                        "restriction": "none"
+                    },
+                    "questionResponse": {
+                        "enabled": true,
+                        "command": "faq",
+                        "restriction": "none"
+                    }
+                }
+            }
         },
-        "mist": {
-            "counter": 0
+        "customCommands": {
+            "enabled": true,
+            "commands": {
+                "lurk": {
+                    "displayName": "Lurk",
+                    "enabled": true,
+                    "command": "lurk",
+                    "restriction": "none",
+                    "userCooldown": 0,
+                    "globalCooldown": 1,
+                    "description": "test",
+                    "response": [
+                        "@{username} verschwindet in's Gebüsch Lurking ... Möge der Lurk mit dir sein! catLurk",
+                        "@{username} hat den Tarnmodus aktiviert. Lurking Danke fürs Lurken und die Unterstützung! PETTHECHAT",
+                        "@{username} ist AFK gegangen, aber XP fürs Lurken gibt's trotzdem! GoodGame Danke für den Support!",
+                        "@{username} hat den Chat in den Hintergrundprozess verschoben. robotD CPU-Auslastung: 0%, Support-Level: 100%!"
+                    ]
+                },
+                "discord": {
+                    "displayName": "Discord",
+                    "enabled": true,
+                    "command": "dc",
+                    "restriction": "none",
+                    "userCooldown": 1,
+                    "globalCooldown": 1,
+                    "description": "test",
+                    "response": "Salzkasten Discord Server: https://discord.gg/w9ussRAcFT"
+                }
+            }
         }
     }
 }
