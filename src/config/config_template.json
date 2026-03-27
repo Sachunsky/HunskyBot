@@ -1,0 +1,128 @@
+{
+  "userSettings": {
+    "channel": "",
+    "prefix": "!",
+    "timezone": "Europe/Berlin",
+    "altTimezone": null
+  },
+  "commands": {
+    "help": {
+      "type": "builtin",
+      "enabled": true,
+      "response": null,
+      "userCooldown": 0,
+      "globalCooldown": 5,
+      "restriction": "none",
+      "displayName": "Help",
+      "description": "Lists all enabled commands."
+    },
+    "lurk": {
+      "type": "builtin",
+      "enabled": true,
+      "response": null,
+      "userCooldown": 0,
+      "globalCooldown": 0,
+      "restriction": "none",
+      "displayName": "Lurk",
+      "description": "Sends a random lurk message."
+    },
+    "queue": {
+      "type": "builtin",
+      "enabled": true,
+      "response": null,
+      "userCooldown": 0,
+      "globalCooldown": 0,
+      "restriction": "none",
+      "displayName": "Queue",
+      "description": "Viewer queue system. Subcommands: join, leave, open, close, next, remove, multi."
+    },
+    "dc": {
+      "type": "simple",
+      "enabled": true,
+      "response": "Salzkasten Discord Server: https://discord.gg/w9ussRAcFT",
+      "userCooldown": 0,
+      "globalCooldown": 10,
+      "restriction": "none",
+      "displayName": "Discord",
+      "description": "Posts the Discord invite link."
+    },
+    "so": {
+      "type": "simple",
+      "enabled": true,
+      "response": "Schaut mal bei @{target} vorbei! Mega Content, reinschauen lohnt sich!",
+      "userCooldown": 0,
+      "globalCooldown": 0,
+      "restriction": "mod",
+      "displayName": "Shoutout",
+      "description": "Shoutout for another streamer. Mod only."
+    },
+    "hug": {
+      "type": "simple",
+      "enabled": true,
+      "response": "@{username} umarmt den Chat! Gruppenumarmung! <3",
+      "userCooldown": 30,
+      "globalCooldown": 0,
+      "restriction": "none",
+      "displayName": "Hug",
+      "description": "Sends a hug to chat."
+    },
+    "dead": {
+      "type": "counter",
+      "enabled": true,
+      "response": "@{streamer} geht nun schon zum {counter}-mal im Himmel die Patchnotes lesen! Sadge RIP",
+      "userCooldown": 0,
+      "globalCooldown": 5,
+      "restriction": "mod",
+      "displayName": "Death Counter",
+      "description": "Tracks streamer deaths. Mod only."
+    },
+    "lost": {
+      "type": "counter",
+      "enabled": true,
+      "response": "@{streamer} ist zum {counter}-mal so orientierungslos wie ein Navi ohne GPS! WaitWhat catJAM",
+      "userCooldown": 0,
+      "globalCooldown": 5,
+      "restriction": "mod",
+      "displayName": "Lost Counter",
+      "description": "Tracks how often the streamer gets lost. Mod only."
+    },
+    "mist": {
+      "type": "counter",
+      "enabled": true,
+      "response": "@{streamer} macht zum {counter}-mal nur Mist! NOPERS ThisIsFine",
+      "userCooldown": 0,
+      "globalCooldown": 5,
+      "restriction": "mod",
+      "displayName": "Mist Counter",
+      "description": "Tracks streamer blunders. Mod only."
+    },
+    "subonly": {
+      "type": "simple",
+      "enabled": false,
+      "response": "Danke fürs Abonnieren, {username}! Du bist der Beste!",
+      "userCooldown": 0,
+      "globalCooldown": 0,
+      "restriction": "sub",
+      "displayName": "Sub Only Test",
+      "description": "Test command for sub-only restriction. Disabled by default."
+    }
+  },
+  "counters": {
+    "dead": {
+      "counter": 0
+    },
+    "lost": {
+      "counter": 0
+    },
+    "mist": {
+      "counter": 0
+    }
+  },
+  "lists": {
+    "queue": {
+      "players": [],
+      "multiJoin": true,
+      "joinable": false
+    }
+  }
+}
